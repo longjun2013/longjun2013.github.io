@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Karma | Liu Longjun's Blog]]></title>
+  <link href="http://longjun2013.github.io/blog/categories/karma/atom.xml" rel="self"/>
+  <link href="http://longjun2013.github.io/"/>
+  <updated>2013-04-28T00:40:42+10:00</updated>
+  <id>http://longjun2013.github.io/</id>
+  <author>
+    <name><![CDATA[Longjun]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[使用Maven工具让Web应用一键运行Unit Tests和Functional Tests]]></title>
+    <link href="http://longjun2013.github.io/blog/2013/04/27/run-unit-tests-and-functional-tests-together-with-maven/"/>
+    <updated>2013-04-27T23:40:00+10:00</updated>
+    <id>http://longjun2013.github.io/blog/2013/04/27/run-unit-tests-and-functional-tests-together-with-maven</id>
+    <content type="html"><![CDATA[<p>最近在做Web项目开发，使用AngularJS。一开始不知道怎么做测试，后来，在<a href="http://www.yearofmoo.com/2013/01/full-spectrum-testing-with-angularjs-and-testacular.html">这个页面</a>里了解了很多AngularJS的单元测试和功能测试(End to End测试)技巧。 因此，在项目中，我们使用<a href="http://karma-runner.github.io/0.8/index.html">Karma</a>(之前叫做Testacular)来运行Javascript的单元测试，也用Karma来运行AngularJS的e2e测试。</p>
+
+<p>接着，我们写了两个Karma的配置文件，一个是单元测试的，一个是e2e测试的。我们可以用Karma命令单独运行这两种测试，但是我们又希望能够把这两个测试集成到应用的构建脚本中，以便我们运行<code>mvn clean install</code>时，就会运行这两种测试，只要有其中一种测试失败，构建就失败。</p>
+
+<p>使用<a href="https://github.com/karma-runner/maven-karma-plugin">Karma Maven Plugin</a>可以很轻松地配置单元测试和e2e测试。</p>
+
+<p>配置如下：</p>
+
+<!-- more -->
+
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;plugin&gt;&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;pre&gt;&lt;code&gt;</span><span class="ni">&amp;lt;</span>groupId<span class="ni">&amp;gt;</span>com.kelveden<span class="ni">&amp;lt;</span>/groupId<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>artifactId<span class="ni">&amp;gt;</span>maven-karma-plugin<span class="ni">&amp;lt;</span>/artifactId<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>version<span class="ni">&amp;gt;</span>1.0<span class="ni">&amp;lt;</span>/version<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>executions<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>execution<span class="ni">&amp;gt;</span>
+</span><span class='line'>        <span class="ni">&amp;lt;</span>id<span class="ni">&amp;gt;</span>unit-test<span class="ni">&amp;lt;</span>/id<span class="ni">&amp;gt;</span>
+</span><span class='line'>        <span class="ni">&amp;lt;</span>phase<span class="ni">&amp;gt;</span>test<span class="ni">&amp;lt;</span>/phase<span class="ni">&amp;gt;</span>
+</span><span class='line'>        <span class="ni">&amp;lt;</span>goals<span class="ni">&amp;gt;</span>
+</span><span class='line'>            <span class="ni">&amp;lt;</span>goal<span class="ni">&amp;gt;</span>start<span class="ni">&amp;lt;</span>/goal<span class="ni">&amp;gt;</span>
+</span><span class='line'>        <span class="ni">&amp;lt;</span>/goals<span class="ni">&amp;gt;</span>
+</span><span class='line'>        <span class="ni">&amp;lt;</span>configuration<span class="ni">&amp;gt;</span>
+</span><span class='line'>            <span class="ni">&amp;lt;</span>configFile<span class="ni">&amp;gt;</span>/path/to/karma.conf.unit.js<span class="ni">&amp;lt;</span>/configFile<span class="ni">&amp;gt;</span>
+</span><span class='line'>        <span class="ni">&amp;lt;</span>/configuration<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>/execution<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>execution<span class="ni">&amp;gt;</span>
+</span><span class='line'>        <span class="ni">&amp;lt;</span>id<span class="ni">&amp;gt;</span>e2e-test<span class="ni">&amp;lt;</span>/id<span class="ni">&amp;gt;</span>
+</span><span class='line'>        <span class="ni">&amp;lt;</span>phase<span class="ni">&amp;gt;</span>integration-test<span class="ni">&amp;lt;</span>/phase<span class="ni">&amp;gt;</span>
+</span><span class='line'>        <span class="ni">&amp;lt;</span>goals<span class="ni">&amp;gt;</span>
+</span><span class='line'>            <span class="ni">&amp;lt;</span>goal<span class="ni">&amp;gt;</span>start<span class="ni">&amp;lt;</span>/goal<span class="ni">&amp;gt;</span>
+</span><span class='line'>        <span class="ni">&amp;lt;</span>/goals<span class="ni">&amp;gt;</span>
+</span><span class='line'>        <span class="ni">&amp;lt;</span>configuration<span class="ni">&amp;gt;</span>
+</span><span class='line'>            <span class="ni">&amp;lt;</span>configFile<span class="ni">&amp;gt;</span>/path/to/karma.conf.e2e.js<span class="ni">&amp;lt;</span>/configFile<span class="ni">&amp;gt;</span>
+</span><span class='line'>        <span class="ni">&amp;lt;</span>/configuration<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>/execution<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>/executions<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="nt">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;p&gt;&lt;/plugin&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>以上代码指定了单元测试和功能测试分别在Maven的Life cycle的<code>test</code>和<code>integration-test</code>阶段运行。</p>
+
+<p>好了，当我们运行<code>mvn clean install</code>时，单元测试可以正常运行，但是e2e测试却失败了。原来，AngularJS的e2e测试需要启动Web服务器，访问真实的URL才行，否则e2e测试就没有意义了呀。
+由于我们还没有配置Web服务器，所以e2e测试就失败了。</p>
+
+<p>那么，接下来就是配置Jetty服务器，让Jetty服务器在运行<code>integration-test</code>之前启动，在<code>integration-test</code>运行完成之后关闭就好了。同样，我们要用<a href="http://docs.codehaus.org/display/JETTY/Maven+Jetty+Plugin">Jetty Maven Plugin</a>来达到目的。</p>
+
+<p>下面是Jetty的配置：</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;plugin&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;groupId&gt;</span>org.mortbay.jetty<span class="nt">&lt;/groupId&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;artifactId&gt;</span>maven-jetty-plugin<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;version&gt;</span>6.1.10<span class="nt">&lt;/version&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;configuration&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;stopKey&gt;</span>foo<span class="nt">&lt;/stopKey&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;stopPort&gt;</span>9999<span class="nt">&lt;/stopPort&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/configuration&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;executions&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;execution&gt;</span>
+</span><span class='line'>                        <span class="nt">&lt;id&gt;</span>start-jetty<span class="nt">&lt;/id&gt;</span>
+</span><span class='line'>                        <span class="nt">&lt;phase&gt;</span>pre-integration-test<span class="nt">&lt;/phase&gt;</span>
+</span><span class='line'>                        <span class="nt">&lt;goals&gt;</span>
+</span><span class='line'>                                <span class="nt">&lt;goal&gt;</span>run<span class="nt">&lt;/goal&gt;</span>
+</span><span class='line'>                        <span class="nt">&lt;/goals&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;/execution&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;execution&gt;</span>
+</span><span class='line'>                        <span class="nt">&lt;id&gt;</span>stop-jetty<span class="nt">&lt;/id&gt;</span>
+</span><span class='line'>                        <span class="nt">&lt;phase&gt;</span>post-integration-test<span class="nt">&lt;/phase&gt;</span>
+</span><span class='line'>                        <span class="nt">&lt;goals&gt;</span>
+</span><span class='line'>                                <span class="nt">&lt;goal&gt;</span>stop<span class="nt">&lt;/goal&gt;</span>
+</span><span class='line'>                        <span class="nt">&lt;/goals&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;/execution&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/executions&gt;</span>
+</span><span class='line'><span class="nt">&lt;/plugin&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>如上面的代码所示，Jetty会在Maven的Life Cycle中的<code>pre-integration-test</code>阶段启动，在<code>post-integration-test</code>阶段关闭。</p>
+
+<p>好了，这下运行<code>mvn clean install</code>，会先运行Unit Tests，再启动Jetty，然后再运行e2e测试，最后关闭Jetty服务器。</p>
+
+<p>完美了。</p>
+]]></content>
+  </entry>
+  
+</feed>
