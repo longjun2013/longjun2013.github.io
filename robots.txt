@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://longjun2013.github.io/sitemap.xml 
