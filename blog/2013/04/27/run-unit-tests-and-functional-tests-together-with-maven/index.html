@@ -105,7 +105,13 @@
 
 <div class="entry-content"><p>最近在做Web项目开发，使用AngularJS。一开始不知道怎么做测试，后来，在<a href="http://www.yearofmoo.com/2013/01/full-spectrum-testing-with-angularjs-and-testacular.html">这个页面</a>里了解了很多AngularJS的单元测试和功能测试(End to End测试)技巧。 因此，在项目中，我们使用<a href="http://karma-runner.github.io/0.8/index.html">Karma</a>(之前叫做Testacular)来运行Javascript的单元测试，也用Karma来运行AngularJS的e2e测试。</p>
 
-<p>接着，我们写了两个Karma的配置文件，一个是单元测试的，一个是e2e测试的。我们可以用Karma命令单独运行这两种测试，但是我们又希望能够把这两个测试集成到应用的构建脚本中，以便我们运行<code>mvn clean install</code>时，就会运行这两种测试，只要有其中一种测试失败，构建就失败。</p>
+<p>接着，我们写了两个Karma的配置文件，一个是单元测试的，一个是e2e测试的。我们可以用Karma命令单独运行这两种测试，但是我们又希望能够把这两个测试集成到应用的构建脚本中，以便我们运行</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ mvn clean install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>时，就会运行这两种测试，只要有其中一种测试失败，构建就失败。</p>
 
 <p>使用<a href="https://github.com/karma-runner/maven-karma-plugin">Karma Maven Plugin</a>可以很轻松地配置单元测试和e2e测试。</p>
 
@@ -175,7 +181,13 @@
 
 <p>以上代码指定了单元测试和功能测试分别在Maven的Life cycle的<code>test</code>和<code>integration-test</code>阶段运行。</p>
 
-<p>好了，当我们运行<code>mvn clean install</code>时，单元测试可以正常运行，但是e2e测试却失败了。原来，AngularJS的e2e测试需要启动Web服务器，访问真实的URL才行，否则e2e测试就没有意义了呀。
+<p>好了，当我们运行</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ mvn clean install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>时，单元测试可以正常运行，但是e2e测试却失败了。原来，AngularJS的e2e测试需要启动Web服务器，访问真实的URL才行，否则e2e测试就没有意义了呀。
 由于我们还没有配置Web服务器，所以e2e测试就失败了。</p>
 
 <p>那么，接下来就是配置Jetty服务器，让Jetty服务器在运行<code>integration-test</code>之前启动，在<code>integration-test</code>运行完成之后关闭就好了。同样，我们要用<a href="http://docs.codehaus.org/display/JETTY/Maven+Jetty+Plugin">Jetty Maven Plugin</a>来达到目的。</p>
@@ -237,7 +249,13 @@
 
 <p>如上面的代码所示，Jetty会在Maven的Life Cycle中的<code>pre-integration-test</code>阶段启动，在<code>post-integration-test</code>阶段关闭。</p>
 
-<p>好了，这下运行<code>mvn clean install</code>，会先运行Unit Tests，再启动Jetty，然后再运行e2e测试，最后关闭Jetty服务器。</p>
+<p>好了，这下运行</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mvn clean install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>会先运行Unit Tests，再启动Jetty，然后再运行e2e测试，最后关闭Jetty服务器。</p>
 
 <p>完美了。</p>
 </div>
