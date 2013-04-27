@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 手工测试 | Liu Longjun's Blog]]></title>
   <link href="http://longjun2013.github.io/blog/categories/shou-gong-ce-shi/atom.xml" rel="self"/>
   <link href="http://longjun2013.github.io/"/>
-  <updated>2013-04-27T23:12:58+10:00</updated>
+  <updated>2013-04-27T23:32:18+10:00</updated>
   <id>http://longjun2013.github.io/</id>
   <author>
     <name><![CDATA[Longjun]]></name>
@@ -29,6 +29,9 @@
 <p>该项目采用Java，框架是Spring，构建工具是Maven，技术不算很新啦。</p>
 
 <p>好了，要说到<strong>自动化测试</strong>，肯定得先说说我们是如何按照需求进行开发的。</p>
+
+<!-- more -->
+
 
 <p>首先，我们不是按照一份全面的12页的需求说明文档来开发，那样的话，无休止的前期的设计讨论会、数据库设计、代码框架设计、架构讨论会，再加上编码和测试的时间，等全部功能都开发出来都已经是一个月以后了。对我们这个面向消费者的互联网应用来说，一个月太长了。等到一个月以后，这些一个月以前收集的需求和实现的功能，对消费者还有没有价值，都不一定呢。</p>
 
