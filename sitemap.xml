@@ -1,12 +1,16 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
+        <loc>http://longjun2013.github.io/blog/2012/12/20/roberts-rules-of-order/</loc>
+        <lastmod>2013-04-27T22:31:28+10:00</lastmod>
+    </url>
+    <url>
         <loc>http://longjun2013.github.io/blog/archives/</loc>
-        <lastmod>2013-04-27T17:49:10+10:00</lastmod>
+        <lastmod>2013-04-27T22:31:28+10:00</lastmod>
     </url>
     <url>
         <loc>http://longjun2013.github.io/</loc>
-        <lastmod>2013-04-27T17:49:10+10:00</lastmod>
+        <lastmod>2013-04-27T22:31:28+10:00</lastmod>
     </url>
     <url>
         <loc>http://longjun2013.github.io/robots.txt</loc>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Liu Longjun's Blog]]></title>
-  <link href="http://longjun2013.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: 如何开会 | Liu Longjun's Blog]]></title>
+  <link href="http://longjun2013.github.io/blog/categories/ru-he-kai-hui/atom.xml" rel="self"/>
   <link href="http://longjun2013.github.io/"/>
   <updated>2013-04-27T22:33:16+10:00</updated>
   <id>http://longjun2013.github.io/</id>
@@ -18,7 +18,7 @@
     <link href="http://longjun2013.github.io/blog/2012/12/20/roberts-rules-of-order/"/>
     <updated>2012-12-20T21:17:00+11:00</updated>
     <id>http://longjun2013.github.io/blog/2012/12/20/roberts-rules-of-order</id>
-    <content type="html"><![CDATA[<p><img class="alignleft" src="http://longjun2013.github.io/images/2012/12/roberts-rules-cover.jpg" width="90" title="可操作的民主" alt="书的封面">
+    <content type="html"><![CDATA[<p><img class="alignleft" src="/images/2012/12/roberts-rules-cover.jpg" width="90" title="可操作的民主" alt="书的封面">
 这本书很薄，讲述的是这么一个有趣的故事。
 在安徽阜阳南塘村合作社，土生土长的合作社领袖苦恼于合作社的治理问题，其中包括合作社开会过程中存在的“跑题”、“一言堂”、“野蛮争论”等问题。于是结合几名异端者，把“罗伯特议事规则” 带给合作社的村民们，让“罗伯特议事规则”来指导大家，开高效的会议。
 大家可以想象村民们的文化水平，要想把“罗伯特议事规则”，这种高度抽象化和规则化的东西教给他们，是多么的困难，也是多么的有意思。
