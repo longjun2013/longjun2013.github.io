@@ -3,9 +3,9 @@
 # ----------------------- #
 
 url: http://longjun2013.github.io
-title: My Octopress Blog
-subtitle: A blogging framework for hackers.
-author: Your Name
+title: Liu Longjun's Blog
+subtitle: 程序员，曾经混迹于北京，目前混迹于成都
+author: Longjun
 simple_search: http://google.com/search
 description:
 
@@ -89,7 +89,7 @@ disqus_short_name:
 disqus_show_comment_count: false
 
 # Google Analytics
-google_analytics_tracking_id:
+google_analytics_tracking_id: UA-40474766-1
 
 # Facebook Like
 facebook_like: false
