@@ -2,7 +2,7 @@
 layout: post
 title: "成都新办公室装修完毕——谈谈敏捷团队的工作环境"
 date: 2012-05-20 16:57
-published: false
+published: true
 comments: true
 categories: ["敏捷装修","开放办公"]
 ---
